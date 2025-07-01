@@ -12,5 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 601b3b0298fdd6b468c17b19b84e2be3, type: 3}
   m_Name: Machine Gun
   m_EditorClassIdentifier: Assembly-CSharp::WeaponSO
+  prefabs: {fileID: 5514545248298545822, guid: 53b3c76362e06ce4f95c05e2c704ca7c, type: 3}
+  HitVfxPrefab: {fileID: 6546962607701229844, guid: 0186d3378f7a79f48954289dec04aab1,
+    type: 3}
   Damage: 60
-  AttackSpeed: 3
+  FireRate: 0.2
+  isAutomatic: 1
+  canZoom: 0
+  ZoomAmount: 10
+  RotationSpeed: 0.4
+  MagzineSize: 30

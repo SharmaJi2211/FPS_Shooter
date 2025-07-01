@@ -1,46 +1,29 @@
-using StarterAssets;
-using System.Collections;
-using System.Collections.Generic;
+using Unity.Cinemachine;
 using Unity.Mathematics;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
     RaycastHit hit;
-    StarterAssetsInputs starterAssetsInputs;
-    Animator animator;
-    const string SHOOT_ANIMATION = "Shooting";
-
+    CinemachineImpulseSource impulseSource;
+    
+    [SerializeField] LayerMask interactionLayer;
     [SerializeField] ParticleSystem muzzleFlash;
-    [SerializeField] GameObject hitVfxPrefab;
-    [SerializeField] WeaponSO WeaponSo;
 
-    //[SerializeField] int gunDamage;
-    void Start()
+    void Awake()
     {
-        starterAssetsInputs = GetComponentInParent<StarterAssetsInputs>();
-        animator = GetComponentInParent<Animator>();
-    }
-    void Update()
-    {
-        handleShooting();
+        impulseSource = GetComponent<CinemachineImpulseSource>();    
     }
 
-    void handleShooting()
+    public void Shoot(WeaponSO weaponSO)
     {
-        if (!starterAssetsInputs.shoot == true) return;
-
-        muzzleFlash.Play();
-        animator.Play(SHOOT_ANIMATION, 0, 0f);
-
-        starterAssetsInputs.ShootInput(false);
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity))
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity, interactionLayer, QueryTriggerInteraction.Ignore))
         {
-            Instantiate(hitVfxPrefab, hit.point, quaternion.identity);
-
+            muzzleFlash.Play();
+            impulseSource.GenerateImpulse();
+            Instantiate(weaponSO.HitVfxPrefab, hit.point, quaternion.identity);
             Health enemyHealth = hit.collider.GetComponent<Health>();
-            enemyHealth?.takeDamage(WeaponSo.Damage); // Changes damage according to the scriptable attached
-
+            enemyHealth?.takeDamage(weaponSO.Damage); // Changes damage according to the scriptable attached
             // starterAssetsInputs.ShootInput(false);
             //if (enemyHealth != null) 
             //{ 

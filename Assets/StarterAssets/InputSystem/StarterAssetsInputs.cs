@@ -13,6 +13,7 @@ namespace StarterAssets
 		public bool jump;
 		public bool sprint;
 		public bool shoot;
+		public bool zoom;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -49,10 +50,15 @@ namespace StarterAssets
 		{
 			ShootInput(value.isPressed);
 		}
+
+        public void OnZoom(InputValue value)
+        {
+            ZoomInput(value.isPressed);
+        }
 #endif
 
 
-		public void MoveInput(Vector2 newMoveDirection)
+        public void MoveInput(Vector2 newMoveDirection)
 		{
 			move = newMoveDirection;
 		} 
@@ -72,12 +78,17 @@ namespace StarterAssets
 			sprint = newSprintState;
 		}
 
-		public void ShootInput(bool newSprintState)
+		public void ShootInput(bool newShootState)
 		{
-			shoot = newSprintState;
+			shoot = newShootState;
 		}
-		
-		private void OnApplicationFocus(bool hasFocus)
+
+        public void ZoomInput(bool newZoomState)
+        {
+            zoom = newZoomState;
+        }
+
+        private void OnApplicationFocus(bool hasFocus)
 		{
 			SetCursorState(cursorLocked);
 		}
