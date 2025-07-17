@@ -15,7 +15,7 @@ MonoBehaviour:
   prefabs: {fileID: 4437377049354037725, guid: 8b0bc2b1712626c42b7ba85b63449381, type: 3}
   HitVfxPrefab: {fileID: 6546962607701229844, guid: 0186d3378f7a79f48954289dec04aab1,
     type: 3}
-  Damage: 110
+  Damage: 11
   FireRate: 1
   isAutomatic: 0
   canZoom: 1
